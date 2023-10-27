@@ -1,4 +1,6 @@
-package ch03
+package main
+
+import "fmt"
 
 type Node struct {
 	property int
@@ -17,4 +19,11 @@ func (linkedList *LinkedList) AddToHead(property int) {
 		node.nextNode = linkedList.headNode
 	}
 	linkedList.headNode = node
+}
+func main() {
+	var linkedList LinkedList
+	linkedList = LinkedList{}
+	linkedList.AddToHead(1)
+	linkedList.AddToHead(3)
+	fmt.Printf("LinkedList Head Property: %#v", linkedList.headNode.property)
 }
