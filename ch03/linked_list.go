@@ -27,6 +27,16 @@ func (linkedList *LinkedList) IterateList() {
 	}
 }
 
+func (linkedList *LinkedList) LastNode() *Node {
+	var lastNode *Node
+	for node := linkedList.headNode; node != nil; node = node.nextNode {
+		if node.nextNode == nil {
+			lastNode = node
+		}
+	}
+	return lastNode
+}
+
 func main() {
 	var linkedList LinkedList
 	linkedList = LinkedList{}
@@ -35,4 +45,6 @@ func main() {
 	fmt.Printf("LinkedList Head Property: %#v\n", linkedList.headNode.property)
 
 	linkedList.IterateList()
+
+	fmt.Println("Last Node: ", linkedList.LastNode().property)
 }
