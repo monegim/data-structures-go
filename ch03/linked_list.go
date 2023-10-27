@@ -20,10 +20,19 @@ func (linkedList *LinkedList) AddToHead(property int) {
 	}
 	linkedList.headNode = node
 }
+
+func (linkedList *LinkedList) IterateList() {
+	for node := linkedList.headNode; node != nil; node = node.nextNode {
+		fmt.Println("Property: ", node.property)
+	}
+}
+
 func main() {
 	var linkedList LinkedList
 	linkedList = LinkedList{}
 	linkedList.AddToHead(1)
 	linkedList.AddToHead(3)
-	fmt.Printf("LinkedList Head Property: %#v", linkedList.headNode.property)
+	fmt.Printf("LinkedList Head Property: %#v\n", linkedList.headNode.property)
+
+	linkedList.IterateList()
 }
