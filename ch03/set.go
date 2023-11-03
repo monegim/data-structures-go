@@ -15,6 +15,10 @@ func (set *Set[T]) ContainsElement(element T) bool {
 	return exists
 }
 
+func (set *Set[T]) DeleteElement(element T) {
+	delete(set.t_map, element)
+}
+
 func (set *Set[T]) AddElement(element T) {
 	if !set.ContainsElement(element) {
 		set.t_map[element] = true
