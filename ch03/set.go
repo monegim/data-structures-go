@@ -36,6 +36,14 @@ func (set *Set[T]) InterSect(anotherSet *Set[T]) *Set[T] {
 	return intersectSet
 }
 
+func (set *Set[T]) Union(anotherSet *Set[T]) *Set[T] {
+	unionSet := set
+	for value, _ := range anotherSet.t_map {
+		unionSet.AddElement(value)
+	}
+	return unionSet
+}
+
 func main() {
 	set := &Set[int]{}
 	set.New()
