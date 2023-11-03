@@ -60,6 +60,18 @@ func (linkedList *LinkedList) NodeWithValue(property int) *Node {
 	return nil
 }
 
+func (linkedList *LinkedList) AddAfter(nodeProperty, property int) {
+	node := &Node{
+		property: property,
+		nextNode: nil,
+	}
+	nodeWith := linkedList.NodeWithValue(nodeProperty)
+	if nodeWith != nil {
+		node.nextNode = nodeWith.nextNode
+		nodeWith.nextNode = node
+	}
+}
+
 func main() {
 	var linkedList LinkedList
 	linkedList = LinkedList{}
@@ -73,4 +85,6 @@ func main() {
 	//fmt.Println("Last Node: ", linkedList.LastNode().property)
 	linkedList.IterateList()
 	fmt.Println("the node with the, ", -1, "property is: ", linkedList.NodeWithValue(-1))
+	linkedList.AddAfter(3, 5)
+	linkedList.IterateList()
 }
