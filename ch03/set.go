@@ -25,11 +25,27 @@ func (set *Set[T]) AddElement(element T) {
 	}
 }
 
+func (set *Set[T]) InterSect(anotherSet *Set[T]) *Set[T] {
+	intersectSet := &Set[T]{}
+	intersectSet.New()
+	for value, _ := range set.t_map {
+		if anotherSet.ContainsElement(value) {
+			intersectSet.AddElement(value)
+		}
+	}
+	return intersectSet
+}
+
 func main() {
-	set := Set[int]{}
+	set := &Set[int]{}
 	set.New()
 	element := 2
 	fmt.Println("does the set have the element: ", set.ContainsElement(element))
 	set.AddElement(element)
-	fmt.Println("initial set: ", &set)
+	set.AddElement(3)
+	fmt.Println("initial set: ", set)
+	anotherSet := &Set[int]{}
+	anotherSet.New()
+	anotherSet.AddElement(2)
+	fmt.Println(set.InterSect(anotherSet))
 }
