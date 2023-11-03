@@ -50,11 +50,21 @@ func (linkedList *LinkedList) AddToEnd(property int) {
 		linkedList.headNode = node
 	}
 }
+
+func (linkedList *LinkedList) NodeWithValue(property int) *Node {
+	for node := linkedList.headNode; node != nil; node = node.nextNode {
+		if node.property == property {
+			return node
+		}
+	}
+	return nil
+}
+
 func main() {
 	var linkedList LinkedList
 	linkedList = LinkedList{}
-	//linkedList.AddToHead(1)
-	//linkedList.AddToHead(3)
+	linkedList.AddToHead(1)
+	linkedList.AddToHead(3)
 	//fmt.Printf("LinkedList Head Property: %#v\n", linkedList.headNode.property)
 
 	//linkedList.IterateList()
@@ -62,4 +72,5 @@ func main() {
 	linkedList.AddToEnd(-1)
 	//fmt.Println("Last Node: ", linkedList.LastNode().property)
 	linkedList.IterateList()
+	fmt.Println("the node with the, ", -1, "property is: ", linkedList.NodeWithValue(-1))
 }
