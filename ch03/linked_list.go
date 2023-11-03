@@ -37,14 +37,29 @@ func (linkedList *LinkedList) LastNode() *Node {
 	return lastNode
 }
 
+func (linkedList *LinkedList) AddToEnd(property int) {
+	var node = &Node{
+		property: property,
+		nextNode: nil,
+	}
+	lastNode := linkedList.LastNode()
+	if lastNode != nil {
+		lastNode.nextNode = node
+	} else {
+		// List is empty
+		linkedList.headNode = node
+	}
+}
 func main() {
 	var linkedList LinkedList
 	linkedList = LinkedList{}
-	linkedList.AddToHead(1)
-	linkedList.AddToHead(3)
-	fmt.Printf("LinkedList Head Property: %#v\n", linkedList.headNode.property)
+	//linkedList.AddToHead(1)
+	//linkedList.AddToHead(3)
+	//fmt.Printf("LinkedList Head Property: %#v\n", linkedList.headNode.property)
 
+	//linkedList.IterateList()
+	//
+	linkedList.AddToEnd(-1)
+	//fmt.Println("Last Node: ", linkedList.LastNode().property)
 	linkedList.IterateList()
-
-	fmt.Println("Last Node: ", linkedList.LastNode().property)
 }
