@@ -94,15 +94,16 @@ func (tree *BinarySearchTree) MinNode() *int  {
 	// tree.lock.RLock()
 	// defer tree.lock.RUnlock()
 	
-	// var min *int
-	min := new(int)
-	*min = tree.rootNode.value
-	tree.InOrderTraverseTree(func(i int) {
-		if i < *min {
-			*min = i
+	treeNode := tree.rootNode
+	if treeNode == nil {
+		return (*int)(nil)
+	}
+	for {
+		if treeNode.leftNode == nil {
+			return &treeNode.value
 		}
-	})
-	return min
+		treeNode = treeNode.leftNode
+	}	
 }
 func main() {
 	rootNode := &TreeNode{
