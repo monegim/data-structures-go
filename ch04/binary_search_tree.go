@@ -73,6 +73,23 @@ func preOrderTraverseTree(treeNode *TreeNode, function func(int)) {
 		preOrderTraverseTree(treeNode.rightNode, function)
 	}
 }
+
+// PostOrderTraverseTree method
+func (tree *BinarySearchTree) PostOrderTraverseTree(function func(int)) {
+	tree.lock.Lock()
+	defer tree.lock.Unlock()
+	postOrderTraverseTree(tree.rootNode, function)
+}
+
+//  postOrderTraverseTree method
+func postOrderTraverseTree(treeNode *TreeNode, function func(int)) {
+	if treeNode != nil {
+		postOrderTraverseTree(treeNode.leftNode, function)
+		postOrderTraverseTree(treeNode.rightNode, function)
+		function(treeNode.value)
+	}
+}
+
 func main() {
 	rootNode := &TreeNode{
 		key:   15,
@@ -92,5 +109,7 @@ func main() {
 	bst.InOrderTraverseTree(func(i int) { fmt.Println(i) })
 	fmt.Println("PreOrder")
 	bst.PreOrderTraverseTree(func(i int) { fmt.Println(i) })
+	fmt.Println("PostOrder")
+	bst.PostOrderTraverseTree(func(i int) { fmt.Println(i) })
 
 }
