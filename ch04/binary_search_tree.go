@@ -90,6 +90,20 @@ func postOrderTraverseTree(treeNode *TreeNode, function func(int)) {
 	}
 }
 
+func (tree *BinarySearchTree) MinNode() *int  {
+	// tree.lock.RLock()
+	// defer tree.lock.RUnlock()
+	
+	// var min *int
+	min := new(int)
+	*min = tree.rootNode.value
+	tree.InOrderTraverseTree(func(i int) {
+		if i < *min {
+			*min = i
+		}
+	})
+	return min
+}
 func main() {
 	rootNode := &TreeNode{
 		key:   15,
@@ -111,5 +125,5 @@ func main() {
 	bst.PreOrderTraverseTree(func(i int) { fmt.Println(i) })
 	fmt.Println("PostOrder")
 	bst.PostOrderTraverseTree(func(i int) { fmt.Println(i) })
-
+	fmt.Println("min node:", *bst.MinNode())
 }
