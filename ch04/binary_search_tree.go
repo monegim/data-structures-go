@@ -45,16 +45,32 @@ func insertTreeNode(rootNode, newTreeNode *TreeNode) {
 }
 
 // InOrderTraverseTree method
-func (tree *BinarySearchTree) InOrderTraverseTree(function func(int)) {}
+func (tree *BinarySearchTree) InOrderTraverseTree(function func(int)) {
+	tree.lock.Lock()
+	defer tree.lock.Unlock()
+	inOrderTraverseTree(tree.rootNode, function)
+}
+
+func inOrderTraverseTree(treeNode *TreeNode, function func(int)) {
+	if treeNode != nil {
+		inOrderTraverseTree(treeNode.leftNode, function)
+		function(treeNode.value)
+		inOrderTraverseTree(treeNode.rightNode, function)
+	}
+}
 func main() {
 	rootNode := &TreeNode{
-		key:   53,
-		value: 100,
+		key:   15,
+		value: 15,
 	}
 	bst := BinarySearchTree{
 		rootNode: rootNode,
 	}
-	bst.Insert(7, 100)
-	fmt.Println(bst.rootNode)
+	bst.Insert(6, 6)
+	bst.Insert(4, 4)
+	bst.Insert(7, 7)
+	bst.Insert(5, 5)
+	bst.Insert(23, 23)
+	bst.InOrderTraverseTree(func(i int) { fmt.Println(i) })
 
 }
